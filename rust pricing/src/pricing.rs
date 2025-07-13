@@ -106,7 +106,7 @@ impl PricingProblem {
             file.write_all(input.to_string().as_bytes()).map_err(|e| e.to_string())?;
 
             // Execute with proper --input flag
-            let output = Command::new("./rust_trip_calculator")
+            let output = Command::new("logisticoptimizerv2apppairingsbackend/pairing_api/optimization/rust_trip_calculator")
                 .arg("--input")
                 .arg(file.path())
                 .output()
