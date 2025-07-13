@@ -1,4 +1,4 @@
-name: Build Rust Linux Binary
+name: Build Rust Linux Static Binary (Pricing Solver)
 
 on:
   push:
@@ -19,12 +19,15 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Build release
-        run: cargo build --release
+      - name: Add musl target
+        run: rustup target add x86_64-unknown-linux-musl
+
+      - name: Build static binary
+        run: cargo build --release --target x86_64-unknown-linux-musl
         working-directory: "rust pricing"
 
-      - name: Upload Linux binary
+      - name: Upload static binary
         uses: actions/upload-artifact@v4
         with:
-          name: rust-linux-binary-pricing
-          path: rust pricing/target/release/vrp_pricing
+          name: rust-pricing-static
+          path: rust pricing/target/x86_64-unknown-linux-musl/release/vrp_pricing
